@@ -9,7 +9,9 @@
 void drawWindow(std::vector<std::vector<int>>&);
 
 int main() {
-  std::chrono::milliseconds tick(17);
+  // 1000 milliseconds per second, we want 60 fps, so ~16.66
+  int fps = 1000/60;
+  std::chrono::milliseconds tick(fps);
   int x = 0;
   int y = 0;
 
