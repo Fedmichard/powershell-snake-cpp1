@@ -3,17 +3,21 @@
 Player::Player() {
   pos.x = 0;
   pos.y = 0;
+  
+  tailOne = new Tail(Position{.x = 0, .y = 0});
+  tailTwo = new Tail(Position{.x = 0, .y = 0});
 
-  Tail* newTail = new Tail(Position{.x = 0, .y = 0});
-  tailOne = newTail;
+  tailOne->next = tailTwo;
 }
 
 Player::Player(int x, int y) {
   pos.x = x;
   pos.y = y;
   
-  Tail* newTail = new Tail(Position{.x = 0, .y = 0});
-  tailOne = newTail;
+  tailOne = new Tail(Position{.x = 0, .y = 0});
+  tailTwo = new Tail(Position{.x = 0, .y = 0});
+
+  tailOne->next = tailTwo;
 }
 
 // Need a way to clear the screen before each draw
@@ -41,9 +45,21 @@ void Player::DrawPlayer(std::vector<std::vector<int>>& map, int x, int y) {
     };
   }
 
+  if (tailTwo != nullptr) {
+
+  }
+
   // Track X and Y
   int posX = x;
   int posY = y;
+
+  // The issue with my last problem was that if the input was too big
+  // It would cause an exception error because it was setting the previous value to the 100 that I was putting in main
+  if (x >= cols) {
+    posX = x % cols;
+  } else if (y >= rows) {
+    posY = y % cols;
+  }
 
   // Can probably use % to create snake like mechanic
   // I believe we -2 because the player doesn't start at the first level or last on either X or Y

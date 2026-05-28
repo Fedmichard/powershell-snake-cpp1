@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <iostream>
 
 struct Position {
         int x;
@@ -12,6 +13,7 @@ struct Tail;
 class Player {
 private:
         Tail* tailOne;
+        Tail* tailTwo;
         int _length = 2;
 
         Position pos {
@@ -29,7 +31,7 @@ public:
 // tail -> tail -> tail -> head (player)
 // (current pos)tail -(previous Pos)-> (current pos)tail -(previous Pos)-> (current pos)tail -(previous Pos)-> head (player)
 struct Tail {
-        Position position;
+        Position position {.x = 0, .y = 0};
         Tail* next;
 
         Tail(Position pos) {
@@ -58,7 +60,7 @@ struct Tail {
                 // at the last pos there will be a # to represent the wall
                 if (previousY >= rows - 2) {
                         position.y = previousY % rows;
-                } else if (previousX >= cols - (3 + length)) {
+                } else if (previousX >= cols - 2) {
                         position.x = previousX % cols;
                 }
 
