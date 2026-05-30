@@ -13,7 +13,6 @@ struct Tail;
 class Player {
 private:
         Tail* tailOne;
-        Tail* tailTwo;
         int _length = 2;
 
         Position pos {
@@ -31,7 +30,8 @@ public:
 // tail -> tail -> tail -> head (player)
 // (current pos)tail -(previous Pos)-> (current pos)tail -(previous Pos)-> (current pos)tail -(previous Pos)-> head (player)
 struct Tail {
-        Position position {.x = 0, .y = 0};
+        Position position { .x = 0, .y = 0 };
+        Position previousPosition { .x = 0, .y =0 };
         Tail* next;
 
         Tail(Position pos) {
@@ -46,6 +46,11 @@ struct Tail {
                 // Current x and y pos
                 int previousX = position.x;
                 int previousY = position.y;
+
+                previousPosition = {
+                        .x = previousX,
+                        .y = previousY
+                };
 
                 if (next != nullptr) {
                         next->position = {

@@ -23,7 +23,7 @@ int main() {
     std::system("cls");
 
     // Update player pos
-    snake.DrawPlayer(MapOne, x, 100);
+    snake.DrawPlayer(MapOne, 13, y);
 
     // Draw window with new player pos
     drawWindow(MapOne);
@@ -49,6 +49,8 @@ void drawWindow(std::vector<std::vector<int>>& map) {
         std::cout << "#";
       } else if (map[row].at(col) == 2) {
         std::cout << "%";
+      } else if (map[row].at(col) == 3) {
+        std::cout << "o";
       } else {
         std::cout << " ";
       }
