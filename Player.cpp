@@ -11,7 +11,7 @@ Player::Player() {
 Player::Player(int x, int y) {
   pos.x = x;
   pos.y = y;
-  
+
   Tail* newTail = new Tail(Position{.x = 0, .y = 0});
   tailOne = newTail;
 }
@@ -48,11 +48,6 @@ void Player::DrawPlayer(std::vector<std::vector<int>>& map, int x, int y) {
 
   if (tailOne != nullptr) {
     previousTailOne = tailOne->position;
-
-    tailOne->position = {
-      .x = previousX,
-      .y = previousY
-    };
   }
 
   // Can probably use % to create snake like mechanic
@@ -86,10 +81,8 @@ void Player::DrawPlayer(std::vector<std::vector<int>>& map, int x, int y) {
     map[pos.y].at(pos.x) = 2;
     // if the player hits a food item
   } else if (map[pos.y].at(pos.x) == 3) {
-    Position newPosition;
-
     if (!tailOne->next) {
-      Tail newTail(tailOne->previousPosition);
+      Tail newTail(Position{ .x = 0, .y = 0 });
 
       tailOne->next = &newTail;
     }
@@ -98,10 +91,11 @@ void Player::DrawPlayer(std::vector<std::vector<int>>& map, int x, int y) {
   }
 
   if (tailOne != nullptr) {
-    tailOne->Draw(map, _length);
-  }
+    tailOne->position = {
+      .x = previousX,
+      .y = previousY
+    };
 
-  if (tailOne->next != nullptr) {
-    tailOne->next->Draw(map, _length);
+    tailOne->Draw(map, previousX, previousY);
   }
 }
