@@ -1,5 +1,11 @@
 #include "./Player.h"
 
+// Need to look into this later, I'm assuming when I add the new tail it throws out of range
+/*
+* terminate called after throwing an instance of 'std::out_of_range'
+* what():  vector::_M_range_check: __n (which is 18446744071851472544) >= this->size() (which is 76)
+*/
+
 Player::Player() {
   pos.x = 0;
   pos.y = 0;
