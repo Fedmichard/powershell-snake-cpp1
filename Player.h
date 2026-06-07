@@ -31,11 +31,10 @@ public:
 struct Tail {
         Position position { .x = 0, .y = 0 };
         Position previousPosition { .x = 0, .y =0 };
-        Tail* next;
+        Tail* next = nullptr;
 
         Tail(Position pos) {
                 position = pos;
-                next = nullptr;
         }
 
         void Draw(std::vector<std::vector<int>>& map, int x, int y) {
@@ -56,9 +55,9 @@ struct Tail {
                 int previousX = position.x;
                 int previousY = position.y;
 
-                if (previousY >= rows - 3) {
+                if (previousY >= rows - 2) {
                         previousY = previousY % rows;
-                } else if (previousX >= cols - 3) {
+                } else if (previousX >= cols - 2) {
                         previousX = previousX % cols;
                 }
 

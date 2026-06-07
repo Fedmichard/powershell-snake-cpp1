@@ -50,7 +50,7 @@ void Player::DrawPlayer(std::vector<std::vector<int>>& map, int x, int y) {
   int previousX = pos.x;
   int previousY = pos.y;
 
-  Position previousTailOne;
+  Position previousTailOne{};
 
   if (tailOne != nullptr) {
     previousTailOne = tailOne->position;
@@ -88,9 +88,9 @@ void Player::DrawPlayer(std::vector<std::vector<int>>& map, int x, int y) {
     // if the player hits a food item
   } else if (map[pos.y].at(pos.x) == 3) {
     if (!tailOne->next) {
-      Tail newTail(Position{ .x = 0, .y = 0 });
+      Tail* newTail = new Tail({ .x = 24, .y = 12 });
 
-      tailOne->next = &newTail;
+      tailOne->next = newTail;
     }
 
     map[pos.y].at(pos.x) = 0;
