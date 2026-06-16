@@ -156,6 +156,6 @@ void Tail::Draw(std::vector<std::vector<int>>& map, int x, int y) {
   }
 
   if (next != nullptr) {
-        next->Draw(map, previousX, previousY - 1);
+        next->Draw(map, previousX, previousY);
   }
 }
