@@ -29,6 +29,7 @@ int main() {
     drawWindow(MapOne);
 
     // Update pos
+    // I think I need to stop incrementing inside here and increment instead inside of my player.cpp and tail.cpp
     x++;
     y++;
 
