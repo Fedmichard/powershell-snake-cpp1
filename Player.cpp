@@ -22,6 +22,45 @@ Player::Player(int x, int y) {
   tailOne = newTail;
 }
 
+// revised player draw
+void Player::Draw(std::vector<std::vector<int>>& map) {
+  std::cout << "Position X: " << pos.x << ", Y: " << pos.y << std::endl; 
+  // x and y
+  // we can use map[0] because each column is the same length
+  int rows = map.size();
+  int cols = map[0].size();
+
+  // if the position is greater or equal to the number of columns
+  // draw player at the bottom
+  if (pos.x >= cols) {
+    pos.x = pos.x % cols;
+  } else if (pos.y >= rows) {
+    pos.y = pos.y % rows;
+  }
+
+  // does a full copy of pos into prevPos
+  prevPos = pos;
+
+  // 1 is a wall, if it isn't a wall set the previous position it steps on
+  // back to an empty space
+  
+
+  // Increment the current position
+  // pos.x++;
+  // pos.y++; // test in just the y for now
+  
+  // Check position from map for drawing
+  // if the current position is 0
+  if (map[pos.y].at(pos.x) == 0) {
+    // Draw the player
+    map[pos.y].at(pos.x) = 2;
+
+    // if the player hits a food item
+  } else if (map[pos.y].at(pos.x) == 3) {
+    // create a new tail and add it to the end
+  }
+}
+
 // Need a way to clear the screen before each draw
 // Flow will be:
 //  1. Clear Screen

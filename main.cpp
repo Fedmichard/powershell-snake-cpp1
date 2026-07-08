@@ -23,7 +23,8 @@ int main() {
     std::system("cls");
 
     // Update player pos
-    snake.DrawPlayer(MapOne, 13, y);
+    // snake.DrawPlayer(MapOne, 13, y);
+    snake.Draw(MapOne);
 
     // Draw window with new player pos
     drawWindow(MapOne);

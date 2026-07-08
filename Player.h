@@ -14,16 +14,19 @@ class Player {
 private:
         Tail* tailOne;
 
-        Position pos {
-                .x = 0,
-                .y = 0
-        };
+        std::vector<Tail> body;
 
+        Position pos = { .x = 20, .y = 20};
+        Position prevPos { .x = 0, .y = 0 };
+
+        int length { 1 };
 public:
         Player(int x, int y);
         Player();
 
         void DrawPlayer(std::vector<std::vector<int>>& map, int x, int y);
+        void Draw(std::vector<std::vector<int>>& map);
+        void addTail(Position);
 };
 
 // tail -> tail -> tail -> head (player)
@@ -31,6 +34,7 @@ public:
 struct Tail {
         Position position { .x = 0, .y = 0 };
         Position previousPosition { .x = 0, .y =0 };
+
         Tail* next = nullptr;
 
         Tail(Position pos) {
