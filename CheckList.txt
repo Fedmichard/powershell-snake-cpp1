@@ -1,0 +1,8 @@
+[x] TO DO LIST
+[x] Review Code
+[x] Refactor all pointers that point to an object on the stack
+[x] Figure out why new player creation doesn't appear to store default data values (Was clearing the data)
+[ ] Refactor how we're drawing to the window, currently we're writing the player data, food data, and map data to a map.cpp file, then we're drawing the map file itself
+[ ] Remove the use of linked list data structure for vector so I can draw based on the length of the snake
+[x] Review Notes from Code The Hidden Language
+[x] Finish next chapter of Code The Hidden Language

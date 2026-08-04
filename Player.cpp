@@ -1,15 +1,6 @@
 #include "./Player.h"
 
-// Need to look into this later, I'm assuming when I add the new tail it throws out of range
-/*
-* terminate called after throwing an instance of 'std::out_of_range'
-* what():  vector::_M_range_check: __n (which is 18446744071851472544) >= this->size() (which is 76)
-*/
-
 Player::Player() {
-  pos.x = 0;
-  pos.y = 0;
-
   Tail* newTail = new Tail(Position{.x = 0, .y = 0});
   tailOne = newTail;
 }
@@ -23,32 +14,32 @@ Player::Player(int x, int y) {
 }
 
 // revised player draw
+// Maybe it is the case that the x and y doesn't exist outside of this?
 void Player::Draw(std::vector<std::vector<int>>& map) {
-  std::cout << "Position X: " << pos.x << ", Y: " << pos.y << std::endl; 
   // x and y
   // we can use map[0] because each column is the same length
   int rows = map.size();
   int cols = map[0].size();
 
-  // if the position is greater or equal to the number of columns
-  // draw player at the bottom
+  // Is gonna stay because as we increment pos.y/pos.x it'll eventually grow too large
   if (pos.x >= cols) {
     pos.x = pos.x % cols;
   } else if (pos.y >= rows) {
     pos.y = pos.y % rows;
   }
 
-  // does a full copy of pos into prevPos
-  prevPos = pos;
+  // Debug info
+  std::cout << "Position X: " << pos.x << ", Y: " << pos.y << std::endl; 
+  std::cout << "Cols: " << cols << ", Rows: " << rows << std::endl; 
 
-  // 1 is a wall, if it isn't a wall set the previous position it steps on
-  // back to an empty space
-  
+  // if the position is greater or equal to the number of columns
+  // draw player at the bottom
+  if (pos.x >= cols - 2) {
+    pos.x = pos.x % cols;
+  } else if (pos.y >= rows - 2) {
+    pos.y = pos.y % rows;
+  }
 
-  // Increment the current position
-  // pos.x++;
-  // pos.y++; // test in just the y for now
-  
   // Check position from map for drawing
   // if the current position is 0
   if (map[pos.y].at(pos.x) == 0) {
@@ -59,6 +50,19 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
   } else if (map[pos.y].at(pos.x) == 3) {
     // create a new tail and add it to the end
   }
+
+  // Delete the previous position
+  if (map[prevPos.y].at(prevPos.x) != 1) {
+    // Set it's previous position as 0 so the next time it's drawn, there'll be a blank spot
+    map[prevPos.y].at(prevPos.x) = 0;
+  }
+
+  // does a full copy of pos into prevPos
+  prevPos.x = pos.x;
+  prevPos.y = pos.y;
+  
+  // Increment y
+  pos.y++;
 }
 
 // Need a way to clear the screen before each draw

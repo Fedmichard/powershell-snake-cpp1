@@ -9,13 +9,13 @@
 void drawWindow(std::vector<std::vector<int>>&);
 
 int main() {
-  // 1000 milliseconds per second, we want 60 fps, so ~16.66
+  // 1000 milliseconds per second, so ~16.66
+  // We want to draw 60 frames in a single second
   int fps = 1000/60;
   std::chrono::milliseconds tick(fps);
-  int x = 0;
-  int y = 0;
 
-  Player snake;
+  // Snake player
+  Player* snake = new Player;
 
   // Main game loop
   while (true) {
@@ -24,17 +24,15 @@ int main() {
 
     // Update player pos
     // snake.DrawPlayer(MapOne, 13, y);
-    snake.Draw(MapOne);
+    // No longer passing the position within here
+    // This isn't really draw, we're writing to a map we specified
+    snake->Draw(MapOne);
 
     // Draw window with new player pos
+    // Draw the map itself with the data
     drawWindow(MapOne);
 
-    // Update pos
-    // I think I need to stop incrementing inside here and increment instead inside of my player.cpp and tail.cpp
-    x++;
-    y++;
-
-    // 30 FPS
+    // 60 FPS
     std::this_thread::sleep_for(tick);
   }
 
