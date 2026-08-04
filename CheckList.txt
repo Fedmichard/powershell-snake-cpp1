@@ -6,3 +6,4 @@
 [ ] Remove the use of linked list data structure for vector so I can draw based on the length of the snake
 [x] Review Notes from Code The Hidden Language
 [x] Finish next chapter of Code The Hidden Language
+[ ] Adjust the tail structs draw call so that it continuously iterates through the array or it calls itself recursively based on the length of the array? Maybe set length of player to vector.size()?

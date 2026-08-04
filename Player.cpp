@@ -49,6 +49,8 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
     // if the player hits a food item
   } else if (map[pos.y].at(pos.x) == 3) {
     // create a new tail and add it to the end
+    Tail* newTail = new Tail({.x = prevPos.x, .y = prevPos.y});
+    body.push_back(newTail);
   }
 
   // Delete the previous position
@@ -60,7 +62,7 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
   // does a full copy of pos into prevPos
   prevPos.x = pos.x;
   prevPos.y = pos.y;
-  
+
   // Increment y
   pos.y++;
 }

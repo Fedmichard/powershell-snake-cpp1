@@ -14,9 +14,9 @@ class Player {
 private:
         Tail* tailOne;
 
-        std::vector<Tail> body;
+        std::vector<Tail*> body;
 
-        Position pos = { .x = 20, .y = 20};
+        Position pos { .x = 20, .y = 20 };
         Position prevPos { .x = 0, .y = 0 };
 
         int length { 1 };
