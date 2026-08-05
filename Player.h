@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <iostream>
+#include <conio.h>
 
 struct Position {
         int x;
@@ -12,19 +13,15 @@ struct Tail;
 
 class Player {
 private:
-        Tail* tailOne;
-
         std::vector<Tail*> body;
 
-        Position pos { .x = 20, .y = 20 };
+        Position pos { .x = 0, .y = 0 };
         Position prevPos { .x = 0, .y = 0 };
 
         int length { 1 };
 public:
-        Player(int x, int y);
         Player();
 
-        void DrawPlayer(std::vector<std::vector<int>>& map, int x, int y);
         void Draw(std::vector<std::vector<int>>& map);
         void addTail(Position);
 };

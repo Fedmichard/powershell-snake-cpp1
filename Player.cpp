@@ -1,22 +1,12 @@
 #include "./Player.h"
+#include <conio.h>
 
 Player::Player() {
-  Tail* newTail = new Tail(Position{.x = 0, .y = 0});
-  tailOne = newTail;
+  pos = { .x = 13, .y = 19 };
 }
 
-Player::Player(int x, int y) {
-  pos.x = x;
-  pos.y = y;
-
-  Tail* newTail = new Tail(Position{.x = 0, .y = 0});
-  tailOne = newTail;
-}
-
-// revised player draw
-// Maybe it is the case that the x and y doesn't exist outside of this?
+// 0 = EMPTY SPACE, 1 = WALL, 2 = PLAYER, 3 = FOOD
 void Player::Draw(std::vector<std::vector<int>>& map) {
-  // x and y
   // we can use map[0] because each column is the same length
   int rows = map.size();
   int cols = map[0].size();
@@ -30,7 +20,6 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
 
   // Debug info
   std::cout << "Position X: " << pos.x << ", Y: " << pos.y << std::endl; 
-  std::cout << "Cols: " << cols << ", Rows: " << rows << std::endl; 
 
   // if the position is greater or equal to the number of columns
   // draw player at the bottom
@@ -40,7 +29,7 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
     pos.y = pos.y % rows;
   }
 
-  // Check position from map for drawing
+  // Check position for drawing onto map
   // if the current position is 0
   if (map[pos.y].at(pos.x) == 0) {
     // Draw the player
@@ -59,6 +48,14 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
     map[prevPos.y].at(prevPos.x) = 0;
   }
 
+  // This is where I pass value to tail and call draw
+  // Shouldn't even be in a loop, just be a check
+  if (body.size() > 0) {
+    // we shouldn't do it this way because every tail is being set to prevPos.x and prevPos.y
+    // This probably means we need draw call to call itself iteratively
+    body[0]->Draw(map, prevPos.x, prevPos.y);
+  }
+
   // does a full copy of pos into prevPos
   prevPos.x = pos.x;
   prevPos.y = pos.y;
@@ -67,90 +64,7 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
   pos.y++;
 }
 
-// Need a way to clear the screen before each draw
-// Flow will be:
-//  1. Clear Screen
-//  2. drawPlayer
-//  3. drawWindow
-void Player::DrawPlayer(std::vector<std::vector<int>>& map, int x, int y) {
-  std::cout << "Player x: " << pos.x << ", y: " << pos.y << std::endl;
-
-  // Track X and Y
-  int posX = x;
-  int posY = y;
-
-  // Update player pos
-  int rows = map.size();
-  int cols = map[0].size();
- 
-  // The issue with my last problem was that if the input was too big
-  // It would cause an exception error because it was setting the previous value to the 100 that I was putting in main
-  if (x >= cols) {
-    posX = x % cols;
-  } else if (y >= rows) {
-    posY = y % rows;
-  }
-
-  // Current x and y pos
-  int previousX = pos.x;
-  int previousY = pos.y;
-
-  Position previousTailOne{};
-
-  if (tailOne != nullptr) {
-    previousTailOne = tailOne->position;
-  }
-
-  // Can probably use % to create snake like mechanic
-  // I believe we -2 because the player doesn't start at the first level or last on either X or Y
-  // at pos 0 there will be a # to represent the wall
-  // at the last pos there will be a # to represent the wall
-  if (posY >= rows - 2) {
-    posY = posY % rows;
-  } else if (posX >= cols - 2) {
-    posX = posX % cols;
-  }
-
-  // If the preivous position x, y wasn't a wall
-  if (map[previousY].at(previousX) != 1) {
-    // Set it's previous position as 0 so the next time it's drawn, there'll be a blank spot
-    map[previousY].at(previousX) = 0;
-  }
-
-  // As it passes along essentially erase its trace
-  if (map[previousTailOne.y].at(previousTailOne.x) != 1) {
-    map[previousTailOne.y].at(previousTailOne.x) = 0;
-  }
-
-  // Set new X and Y
-  pos.x = posX;
-  pos.y = posY;
-
-  // As long as there is a 0 (for empty space), draw player
-  if (map[pos.y].at(pos.x) == 0) {
-    // Y = row; X = column
-    map[pos.y].at(pos.x) = 2;
-    // if the player hits a food item
-  } else if (map[pos.y].at(pos.x) == 3) {
-    if (!tailOne->next) {
-      Tail* newTail = new Tail({ .x = previousX, .y = previousY });
-
-      tailOne->next = newTail;
-    }
-
-    map[pos.y].at(pos.x) = 0;
-  }
-
-  if (tailOne != nullptr) {
-    tailOne->position = {
-      .x = previousX,
-      .y = previousY
-    };
-
-    tailOne->Draw(map, previousX, previousY);
-  }
-}
-
+// Maybe pass the position
 void Tail::Draw(std::vector<std::vector<int>>& map, int x, int y) {
   // Current x and y pos
   int newPosX = x;
@@ -198,9 +112,5 @@ void Tail::Draw(std::vector<std::vector<int>>& map, int x, int y) {
   if (map[position.y].at(position.x) == 0) {
         // Y = row; X = column
         map[position.y].at(position.x) = 2;
-  }
-
-  if (next != nullptr) {
-        next->Draw(map, previousX, previousY);
   }
 }

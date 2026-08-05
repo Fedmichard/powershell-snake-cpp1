@@ -3,7 +3,12 @@
 [x] Refactor all pointers that point to an object on the stack
 [x] Figure out why new player creation doesn't appear to store default data values (Was clearing the data)
 [ ] Refactor how we're drawing to the window, currently we're writing the player data, food data, and map data to a map.cpp file, then we're drawing the map file itself
-[ ] Remove the use of linked list data structure for vector so I can draw based on the length of the snake
+[x] Remove the use of linked list data structure for vector so I can draw based on the length of the snake
 [x] Review Notes from Code The Hidden Language
 [x] Finish next chapter of Code The Hidden Language
-[ ] Adjust the tail structs draw call so that it continuously iterates through the array or it calls itself recursively based on the length of the array? Maybe set length of player to vector.size()?
+[x] Adjust the tail structs draw call so that it continuously iterates through the array or it calls itself recursively based on the length of the array? Maybe set length of player to vector.size()?
+[x] Find a way to implement input detection in the terminal
+  [x] This is found using _kbhit under conio, you can use it to do some action whenever a key is found and read that key with _getch
+[] Figure out how to continuously pass the previous position down the line
+  [] Maybe when I create a tail, or whenever a food is read, I will check to see if the size of the tail array is 0
+  [] If it is 0 I will create a new tail at the end, if not...

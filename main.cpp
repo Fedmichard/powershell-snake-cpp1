@@ -1,3 +1,4 @@
+#include <conio.h>
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -7,6 +8,7 @@
 #include "./Player.h"
 
 void drawWindow(std::vector<std::vector<int>>&);
+void input();
 
 int main() {
   // 1000 milliseconds per second, so ~16.66
@@ -37,6 +39,12 @@ int main() {
   }
 
   return 0;
+}
+
+void input() {
+  if (_kbhit()) {
+    switch;
+  }
 }
 
 void drawWindow(std::vector<std::vector<int>>& map) {
