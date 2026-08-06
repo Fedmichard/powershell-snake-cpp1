@@ -1,4 +1,5 @@
 #include "./Player.h"
+#include <cctype>
 #include <conio.h>
 
 Player::Player() {
@@ -60,8 +61,19 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
   prevPos.x = pos.x;
   prevPos.y = pos.y;
 
+  if (_kbhit()) {
+    // Maybe the break is for preventing the read of other things and also looping automatically maybe?
+    auto key = tolower(_getch());
+    switch (key) {
+      case 'a': pos.x--;
+      case 'd': pos.x++;
+      case 'w': pos.y--;
+      case 's': pos.y++;
+    }
+  }
+
   // Increment y
-  pos.y++;
+  pos.y--;
 }
 
 // Maybe pass the position
