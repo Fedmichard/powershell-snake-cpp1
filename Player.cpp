@@ -2,6 +2,23 @@
 #include <cctype>
 #include <conio.h>
 
+void UpdatePosition(Position& pos, int dir) {
+  switch (dir) {
+    case 0:
+      pos.x++;
+      break;
+    case 1:
+      pos.x--;
+      break;
+    case 2:
+      pos.y++;
+      break;
+    case 3:
+      pos.y--;
+      break;
+  }
+}
+
 Player::Player() {
   pos = { .x = 13, .y = 19 };
 }
@@ -17,6 +34,10 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
     pos.x = pos.x % cols;
   } else if (pos.y >= rows) {
     pos.y = pos.y % rows;
+  } else if (pos.x < 0) {
+    pos.x = cols - 2;
+  } else if (pos.y < 0) {
+    pos.y = rows - 2;
   }
 
   // Debug info
@@ -28,6 +49,10 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
     pos.x = pos.x % cols;
   } else if (pos.y >= rows - 2) {
     pos.y = pos.y % rows;
+  } else if (pos.x < 0) {
+    pos.x = pos.x % cols - 2;
+  } else if (pos.y < 0) {
+    pos.y = pos.y % rows - 2;
   }
 
   // Check position for drawing onto map
@@ -62,18 +87,25 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
   prevPos.y = pos.y;
 
   if (_kbhit()) {
-    // Maybe the break is for preventing the read of other things and also looping automatically maybe?
     auto key = tolower(_getch());
     switch (key) {
-      case 'a': pos.x--;
-      case 'd': pos.x++;
-      case 'w': pos.y--;
-      case 's': pos.y++;
+      case 'a':
+        update = 1;
+        break;
+      case 'd':
+        update = 0;
+        break;
+      case 'w':
+        update = 3;
+        break;
+      case 's':
+        update = 2;
+        break;
     }
   }
 
   // Increment y
-  pos.y--;
+  UpdatePosition(pos, update);
 }
 
 // Maybe pass the position

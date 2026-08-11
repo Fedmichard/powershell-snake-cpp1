@@ -18,7 +18,7 @@ private:
         Position pos { .x = 0, .y = 0 };
         Position prevPos { .x = 0, .y = 0 };
 
-        int length { 1 };
+        int update { 2 };
 public:
         Player();
 

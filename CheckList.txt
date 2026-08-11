@@ -11,4 +11,9 @@
   [x] This is found using _kbhit under conio, you can use it to do some action whenever a key is found and read that key with _getch
 [] Figure out how to continuously pass the previous position down the line
   [] Maybe when I create a tail, or whenever a food is read, I will check to see if the size of the tail array is 0
-  [] If it is 0 I will create a new tail at the end, if not...
+  [] If it is 0 I will create a new t/ail at the end, if not...
+[x] Account for snake moving backwards
+[x] Figure out why decrement isn't updating snake
+[x] Create 2 switch statements to update the position of the snake and get character movement working
+  [x] Fix the decrement value not being continuously updated, it just goes one
+[x] Go through RadDebugger getting started of some sort so I can start debugging the app
