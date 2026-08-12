@@ -22,7 +22,8 @@ private:
 public:
         Player();
 
-        void Draw(std::vector<std::vector<int>>& map);
+        void Draw(std::vector<std::vector<int>>&);
+        void UpdatePosition(Position&, int);
         void addTail(Position);
 };
 
@@ -38,5 +39,5 @@ struct Tail {
                 position = pos;
         }
 
-        void Draw(std::vector<std::vector<int>>& map, int x, int y);
+        void Draw(std::vector<std::vector<int>>&, int, int);
 };

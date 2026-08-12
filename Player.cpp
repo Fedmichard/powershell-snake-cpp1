@@ -2,23 +2,6 @@
 #include <cctype>
 #include <conio.h>
 
-void UpdatePosition(Position& pos, int dir) {
-  switch (dir) {
-    case 0:
-      pos.x++;
-      break;
-    case 1:
-      pos.x--;
-      break;
-    case 2:
-      pos.y++;
-      break;
-    case 3:
-      pos.y--;
-      break;
-  }
-}
-
 Player::Player() {
   pos = { .x = 13, .y = 19 };
 }
@@ -34,14 +17,15 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
     pos.x = pos.x % cols;
   } else if (pos.y >= rows) {
     pos.y = pos.y % rows;
-  } else if (pos.x < 0) {
+  } else if (pos.x <= 0) {
     pos.x = cols - 2;
-  } else if (pos.y < 0) {
+  } else if (pos.y <= 0) {
     pos.y = rows - 2;
   }
 
   // Debug info
-  std::cout << "Position X: " << pos.x << ", Y: " << pos.y << std::endl; 
+  // std::cout << "Position X: " << pos.x << ", Y: " << pos.y << std::endl; 
+  // std::cout << "Map X: " << cols << ", Y: " << rows << std::endl; 
 
   // if the position is greater or equal to the number of columns
   // draw player at the bottom
@@ -90,22 +74,47 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
     auto key = tolower(_getch());
     switch (key) {
       case 'a':
-        update = 1;
+        if (update != 0) {
+          update = 1;
+        }
         break;
       case 'd':
-        update = 0;
+        if (update != 1) {
+          update = 0;
+        }
         break;
       case 'w':
-        update = 3;
+        if (update != 2) {
+          update = 3;
+        }
         break;
       case 's':
-        update = 2;
+        if (update != 3) {
+          update = 2;
+        }
         break;
     }
   }
 
   // Increment y
   UpdatePosition(pos, update);
+}
+
+void Player::UpdatePosition(Position& pos, int dir) {
+  switch (dir) {
+    case 0:
+      pos.x++;
+      break;
+    case 1:
+      pos.x--;
+      break;
+    case 2:
+      pos.y++;
+      break;
+    case 3:
+      pos.y--;
+      break;
+  }
 }
 
 // Maybe pass the position

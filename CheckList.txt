@@ -17,3 +17,9 @@
 [x] Create 2 switch statements to update the position of the snake and get character movement working
   [x] Fix the decrement value not being continuously updated, it just goes one
 [x] Go through RadDebugger getting started of some sort so I can start debugging the app
+[x] Clean up code
+[x] Review notes about Code the Hidden Language
+[x] Prevent snake from turning around if going in certain direction
+[x] Remove debug
+[x] Move update logic into player class instead of it being standalone
+
