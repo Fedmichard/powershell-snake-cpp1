@@ -60,10 +60,8 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
 
   // This is where I pass value to tail and call draw
   // Shouldn't even be in a loop, just be a check
-  if (body.size() > 0) {
-    // we shouldn't do it this way because every tail is being set to prevPos.x and prevPos.y
-    // This probably means we need draw call to call itself iteratively
-    body[0]->Draw(map, prevPos.x, prevPos.y);
+  for (auto b : body) {
+    b->Draw(map, prevPos.x, prevPos.y);
   }
 
   // does a full copy of pos into prevPos
@@ -96,7 +94,7 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
     }
   }
 
-  // Increment y
+  // Increment based on update value
   UpdatePosition(pos, update);
 }
 
