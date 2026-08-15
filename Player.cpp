@@ -60,8 +60,9 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
 
   // This is where I pass value to tail and call draw
   // Shouldn't even be in a loop, just be a check
-  for (auto b : body) {
-    b->Draw(map, prevPos.x, prevPos.y);
+  for (int i = 0; i < body.size(); i++) {
+    std::cout << "Body count: " << i + 1;
+    body[i]->Draw(map);
   }
 
   // does a full copy of pos into prevPos
@@ -116,19 +117,19 @@ void Player::UpdatePosition(Position& pos, int dir) {
 }
 
 // Maybe pass the position
-void Tail::Draw(std::vector<std::vector<int>>& map, int x, int y) {
+void Tail::Draw(std::vector<std::vector<int>>& map) {
   // Current x and y pos
-  int newPosX = x;
-  int newPosY = y;
+  int newPosX = position.x;
+  int newPosY = position.y;
 
   // Update player pos
   int rows = map.size();
   int cols = map[0].size();
 
-  if (x >= cols) {
-        newPosX = x % cols;
-  } else if (y >= rows) {
-        newPosY = y % rows;
+  if (position.x >= cols) {
+        newPosX = position.x % cols;
+  } else if (position.y >= rows) {
+        newPosY = position.y % rows;
   }
 
   int previousX = position.x;

@@ -39,5 +39,5 @@ struct Tail {
                 position = pos;
         }
 
-        void Draw(std::vector<std::vector<int>>&, int, int);
+        void Draw(std::vector<std::vector<int>>&);
 };

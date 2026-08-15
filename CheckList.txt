@@ -22,4 +22,9 @@
 [x] Prevent snake from turning around if going in certain direction
 [x] Remove debug
 [x] Move update logic into player class instead of it being standalone
-
+[x] Refactor tail draw call
+[x] Setup Nand2Tetris
+[x] Setup CmakeLists.txt
+[x] Change draw loop of the tail objects
+[x] Make map global
+[x] Track length and use it in the tracking the tail update logic
