@@ -62,6 +62,12 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
   // Shouldn't even be in a loop, just be a check
   for (int i = 0; i < body.size(); i++) {
     std::cout << "Body count: " << i + 1;
+
+    if (i != 0) {
+      body[i-1]->position = body[i]->position;
+    }
+
+    body[i]->position = prevPos;
     body[i]->Draw(map);
   }
 
@@ -135,9 +141,9 @@ void Tail::Draw(std::vector<std::vector<int>>& map) {
   int previousX = position.x;
   int previousY = position.y;
 
-  if (previousY >= rows - 3) {
+  if (previousY >= rows - 2) {
         previousY = previousY % rows;
-  } else if (previousX >= cols - 3) {
+  } else if (previousX >= cols - 2) {
         previousX = previousX % cols;
   }
 
