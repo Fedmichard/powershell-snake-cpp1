@@ -61,14 +61,9 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
   // This is where I pass value to tail and call draw
   // Shouldn't even be in a loop, just be a check
   for (int i = 0; i < body.size(); i++) {
-    std::cout << "Body count: " << i + 1;
-
-    if (i != 0) {
-      body[i-1]->position = body[i]->position;
-    }
-
+    map[body[i]->position.y].at(body[i]->position.x) = 0;
     body[i]->position = prevPos;
-    body[i]->Draw(map);
+    body[i]->Draw(map); 
   }
 
   // does a full copy of pos into prevPos
