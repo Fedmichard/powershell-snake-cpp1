@@ -23,8 +23,8 @@
 [x] Remove debug
 [x] Move update logic into player class instead of it being standalone
 [x] Refactor tail draw call
-[x] Setup Nand2Tetris
-[x] Setup CmakeLists.txt
-[x] Change draw loop of the tail objects
-[x] Make map global
-[x] Track length and use it in the tracking the tail update logic
+[] Setup Nand2Tetris
+[] Setup CmakeLists.txt
+[] Change draw loop of the tail objects
+[] Make map global
+[] Track length and use it in the tracking the tail update logic

@@ -28,6 +28,7 @@ void Player::Draw(std::vector<std::vector<int>>& map) {
   // std::cout << "Map X: " << cols << ", Y: " << rows << std::endl; 
 
   // if the position is greater or equal to the number of columns
+  // ed
   // draw player at the bottom
   if (pos.x >= cols - 2) {
     pos.x = pos.x % cols;
