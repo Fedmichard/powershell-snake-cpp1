@@ -28,5 +28,3 @@
 [] Change draw loop of the tail objects
 [] Make map global
 [] Track length and use it in the tracking the tail update logic
-[] Yikes
-
